@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SISTec | Examination Result</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Segoe UI,Arial,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:
+    radial-gradient(circle at top,#dbeafe,transparent 40%),
+    #f1f5f9;
+    color:#172033;
+}
+
+/* HEADER */
+
+header{
+    background:linear-gradient(135deg,#071b4d,#1646a0);
+    color:white;
+    padding:16px 7%;
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.logo{
+    width:50px;
+    height:50px;
+    background:white;
+    color:#1646a0;
+    border-radius:12px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:23px;
+    font-weight:bold;
+}
+
+header h1{
+    font-size:20px;
+}
+
+header p{
+    font-size:12px;
+    opacity:.8;
+}
+
+
+/* RESULT */
+
+.container{
+    max-width:1000px;
+    margin:45px auto;
+    padding:20px;
+}
+
+.result-card{
+    background:white;
+    border-radius:25px;
+    padding:35px;
+    text-align:center;
+    box-shadow:0 15px 45px rgba(0,0,0,.1);
+}
+
+.icon{
+    width:80px;
+    height:80px;
+    margin:auto;
+    border-radius:50%;
+    background:#dcfce7;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:40px;
+}
+
+.result-card h2{
+    margin-top:18px;
+    font-size:30px;
+}
+
+.student{
+    color:#64748b;
+    margin-top:7px;
+}
+
+
+/* SCORE */
+
+.score{
+    margin:30px auto;
+    width:190px;
+    height:190px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    color:white;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 15px 35px rgba(37,99,235,.3);
+}
+
+.score strong{
+    font-size:45px;
+}
+
+.score span{
+    font-size:14px;
+}
+
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-top:25px;
+}
+
+.stat{
+    padding:20px;
+    border-radius:15px;
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+}
+
+.stat strong{
+    display:block;
+    font-size:25px;
+    margin-bottom:5px;
+}
+
+.stat span{
+    color:#64748b;
+    font-size:13px;
+}
+
+
+/* STATUS */
+
+.status{
+    margin:25px auto;
+    display:inline-block;
+    padding:10px 25px;
+    border-radius:30px;
+    font-weight:bold;
+}
+
+
+/* BUTTONS */
+
+.buttons{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    margin-top:25px;
+}
+
+button{
+    border:none;
+    padding:13px 22px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.retry{
+    background:#2563eb;
+    color:white;
+}
+
+.home{
+    background:#e2e8f0;
+}
+
+
+/* REVIEW */
+
+.review{
+    margin-top:30px;
+    text-align:left;
+}
+
+.review h3{
+    margin-bottom:15px;
+}
+
+.question-review{
+    padding:15px;
+    border:1px solid #e2e8f0;
+    border-radius:12px;
+    margin-bottom:10px;
+}
+
+.correct{
+    color:#15803d;
+}
+
+.wrong{
+    color:#dc2626;
+}
+
+.unattempted{
+    color:#d97706;
+}
+
+@media(max-width:700px){
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .result-card{
+        padding:22px;
+    }
+
+    .buttons{
+        flex-direction:column;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="logo">S</div>
+
+    <div>
+        <h1>SISTec</h1>
+        <p>Online Examination Portal</p>
+    </div>
+
+</header>
+
+
+<div class="container">
+
+    <div class="result-card">
+
+        <div class="icon" id="resultIcon">
+            🏆
+        </div>
+
+        <h2 id="resultTitle">
+            Examination Completed
+        </h2>
+
+        <p class="student" id="studentInfo"></p>
+
+
+        <div class="score">
+
+            <strong id="score">
+                0/30
+            </strong>
+
+            <span>
+                Total Score
+            </span>
+
+        </div>
+
+
+        <div
+            class="status"
+            id="status">
+        </div>
+
+
+        <div class="stats">
+
+            <div class="stat">
+
+                <strong
+                    id="correct">
+                    0
+                </strong>
+
+                <span>
+                    Correct
+                </span>
+
+            </div>
+
+
+            <div class="stat">
+
+                <strong
+                    id="wrong">
+                    0
+                </strong>
+
+                <span>
+                    Wrong
+                </span>
+
+            </div>
+
+
+            <div class="stat">
+
+                <strong
+                    id="unattempted">
+                    0
+                </strong>
+
+                <span>
+                    Unattempted
+                </span>
+
+            </div>
+
+
+            <div class="stat">
+
+                <strong
+                    id="percentage">
+                    0%
+                </strong>
+
+                <span>
+                    Percentage
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="buttons">
+
+            <button
+                class="retry"
+                onclick="retryExam()">
+                🔄 Take Test Again
+            </button>
+
+            <button
+                class="home"
+                onclick="goHome()">
+                🏠 Home
+            </button>
+
+        </div>
+
+
+        <div class="review">
+
+            <h3>
+                📊 Question-wise Review
+            </h3>
+
+            <div id="reviewList"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* STUDENT */
+
+const name =
+    localStorage.getItem("studentName") || "Student";
+
+const roll =
+    localStorage.getItem("rollNumber") || "N/A";
+
+
+document.getElementById("studentInfo").innerText =
+    name + " | Roll Number: " + roll;
+
+
+/* RESULT DATA */
+
+const correct =
+    Number(localStorage.getItem("correct") || 0);
+
+const wrong =
+    Number(localStorage.getItem("wrong") || 0);
+
+const unattempted =
+    Number(localStorage.getItem("unattempted") || 0);
+
+const percentage =
+    Number(localStorage.getItem("percentage") || 0);
+
+
+document.getElementById("score").innerText =
+    correct + "/30";
+
+document.getElementById("correct").innerText =
+    correct;
+
+document.getElementById("wrong").innerText =
+    wrong;
+
+document.getElementById("unattempted").innerText =
+    unattempted;
+
+document.getElementById("percentage").innerText =
+    percentage.toFixed(2) + "%";
+
+
+/* PASS / FAIL */
+
+const status =
+    document.getElementById("status");
+
+if(percentage >= 40){
+
+    status.innerText =
+        "✓ PASS";
+
+    status.style.background =
+        "#dcfce7";
+
+    status.style.color =
+        "#15803d";
+
+}
+else{
+
+    status.innerText =
+        "✗ NEEDS IMPROVEMENT";
+
+    status.style.background =
+        "#fee2e2";
+
+    status.style.color =
+        "#dc2626";
+
+}
+
+
+/* REVIEW DATA */
+
+const questions = [
+
+["What is the binary representation of decimal 10?","1010"],
+["What is the decimal value of binary 1010?","10"],
+["Which number system uses only 0 and 1?","Binary"],
+["What is the base of decimal number system?","10"],
+["What is the base of octal number system?","8"],
+["What is the base of hexadecimal number system?","16"],
+["Decimal 15 in binary is:","1111"],
+["Binary 1111 in decimal is:","15"],
+["Decimal 8 in octal is:","10"],
+["Octal 10 in decimal is:","8"],
+["Decimal 10 in hexadecimal is:","A"],
+["Hexadecimal A in decimal is:","10"],
+["Hexadecimal F in binary is:","1111"],
+["Binary 1111 in hexadecimal is:","F"],
+["Which is an invalid digit in octal number system?","8"],
+["Which is an invalid digit in binary number system?","2"],
+["Binary addition 1 + 1 gives:","10"],
+["Binary addition 101 + 11 gives:","1000"],
+["TRUE is commonly represented as:","1"],
+["FALSE is commonly represented as:","0"],
+["TRUE AND FALSE gives:","FALSE"],
+["TRUE OR FALSE gives:","TRUE"],
+["NOT TRUE gives:","FALSE"],
+["Which data type stores TRUE/FALSE values?","boolean"],
+["Decimal 1 in binary is:","1"],
+["Which one is a floating-point number?","3.14"],
+["Decimal 0 in binary is:","0"],
+["Binary 10000 in decimal is:","16"],
+["Decimal 255 in hexadecimal is:","FF"],
+["Which number system is commonly used to represent memory addresses?","Hexadecimal"]
+
+];
+
+
+const answers =
+    JSON.parse(
+        localStorage.getItem("answers") || "[]"
+    );
+
+
+const reviewList =
+    document.getElementById("reviewList");
+
+
+questions.forEach((q,index)=>{
+
+    const div =
+        document.createElement("div");
+
+    div.className =
+        "question-review";
+
+
+    let studentAnswer =
+        answers[index];
+
+
+    if(studentAnswer === null ||
+       studentAnswer === undefined){
+
+        div.innerHTML = `
+
+            <strong>Q${index+1}. ${q[0]}</strong>
+
+            <p class="unattempted">
+                Your Answer: Not Attempted
+            </p>
+
+            <p>
+                Correct Answer: <b>${q[1]}</b>
+            </p>
+
+        `;
+
+    }
+    else{
+
+        /*
+           The option index is converted
+           to readable answer using the
+           question's answer position.
+        */
+
+        let optionText = "";
+
+        const options = [
+
+            index===0 ? ["1010","1001","1110","1100"] : null
+
+        ];
+
+        /*
+           For simple review, display
+           saved answer index.
+        */
+
+        div.innerHTML = `
+
+            <strong>Q${index+1}. ${q[0]}</strong>
+
+            <p>
+                Your Answer:
+                <b>Option ${Number(studentAnswer)+1}</b>
+            </p>
+
+            <p>
+                Correct Answer:
+                <b>${q[1]}</b>
+            </p>
+
+        `;
+
+    }
+
+
+    reviewList.appendChild(div);
+
+});
+
+
+/* RETRY */
+
+function retryExam(){
+
+    localStorage.removeItem("answers");
+    localStorage.removeItem("marked");
+    localStorage.removeItem("currentQuestion");
+    localStorage.removeItem("timeLeft");
+
+    localStorage.removeItem("correct");
+    localStorage.removeItem("wrong");
+    localStorage.removeItem("unattempted");
+    localStorage.removeItem("percentage");
+
+    window.location.href =
+        "exam.html";
+
+}
+
+
+/* HOME */
+
+function goHome(){
+
+    localStorage.clear();
+
+    window.location.href =
+        "index.html";
+
+}
+
+</script>
+
+</body>
+
+</html>

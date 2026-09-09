@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SISTec | Online Examination Portal</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI,Arial,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:#f4f7fb;
+    color:#172033;
+}
+
+/* HEADER */
+header{
+    background:linear-gradient(135deg,#071b4d,#1646a0);
+    color:white;
+    padding:16px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.logo{
+    width:55px;
+    height:55px;
+    background:white;
+    color:#17469f;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
+    font-weight:800;
+}
+
+.brand h1{
+    font-size:22px;
+}
+
+.brand p{
+    font-size:12px;
+    opacity:.8;
+}
+
+.portal{
+    padding:9px 17px;
+    border:1px solid rgba(255,255,255,.3);
+    border-radius:30px;
+    font-size:13px;
+}
+
+/* HERO */
+.hero{
+    max-width:1200px;
+    margin:45px auto 25px;
+    padding:0 25px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:35px;
+    align-items:center;
+}
+
+.badge{
+    display:inline-block;
+    background:#e0e7ff;
+    color:#3730a3;
+    padding:8px 15px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:18px;
+}
+
+.hero h2{
+    font-size:48px;
+    line-height:1.1;
+    color:#0f172a;
+    margin-bottom:18px;
+}
+
+.hero h2 span{
+    color:#2563eb;
+}
+
+.hero-text p{
+    color:#64748b;
+    font-size:16px;
+    line-height:1.7;
+}
+
+.tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:22px;
+}
+
+.tags span{
+    background:white;
+    padding:9px 14px;
+    border-radius:20px;
+    font-size:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,.06);
+}
+
+/* EXAM CARD */
+.exam-card{
+    background:white;
+    padding:28px;
+    border-radius:24px;
+    box-shadow:0 15px 40px rgba(0,0,0,.1);
+}
+
+.exam-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.active{
+    background:#dcfce7;
+    color:#15803d;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.subject{
+    background:linear-gradient(135deg,#eff6ff,#eef2ff);
+    padding:18px;
+    border-radius:15px;
+    margin-bottom:20px;
+}
+
+.subject small{
+    color:#64748b;
+}
+
+.subject h3{
+    margin-top:6px;
+    color:#1e3a8a;
+}
+
+.info-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.info{
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    border-radius:13px;
+    padding:14px;
+}
+
+.info small{
+    display:block;
+    color:#64748b;
+    margin-bottom:5px;
+}
+
+.info strong{
+    color:#0f172a;
+}
+
+/* MAIN */
+.main{
+    max-width:1200px;
+    margin:25px auto 40px;
+    padding:0 25px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+}
+
+.card{
+    background:white;
+    padding:28px;
+    border-radius:22px;
+    box-shadow:0 8px 30px rgba(0,0,0,.07);
+}
+
+.card h3{
+    margin-bottom:20px;
+}
+
+.input-group{
+    margin-bottom:18px;
+}
+
+label{
+    display:block;
+    font-size:13px;
+    font-weight:600;
+    color:#475569;
+    margin-bottom:7px;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    border:1px solid #cbd5e1;
+    border-radius:12px;
+    outline:none;
+    font-size:15px;
+}
+
+input:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 4px rgba(37,99,235,.1);
+}
+
+.checkbox{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    margin:18px 0;
+    font-size:13px;
+    color:#64748b;
+}
+
+.checkbox input{
+    width:auto;
+    margin-top:3px;
+}
+
+.start-btn{
+    width:100%;
+    padding:15px;
+    border:0;
+    border-radius:13px;
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.start-btn:hover{
+    transform:translateY(-2px);
+}
+
+.start-btn:disabled{
+    background:#94a3b8;
+    cursor:not-allowed;
+    transform:none;
+}
+
+.instructions{
+    list-style:none;
+}
+
+.instructions li{
+    padding:9px 0;
+    color:#475569;
+    font-size:14px;
+    border-bottom:1px solid #f1f5f9;
+}
+
+.instructions li::before{
+    content:"✓";
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    width:22px;
+    height:22px;
+    background:#dcfce7;
+    color:#15803d;
+    border-radius:50%;
+    margin-right:9px;
+    font-size:12px;
+}
+
+/* FOOTER */
+footer{
+    background:#0f172a;
+    color:#cbd5e1;
+    text-align:center;
+    padding:25px;
+    font-size:13px;
+}
+
+@media(max-width:800px){
+    .hero,.main{
+        grid-template-columns:1fr;
+    }
+
+    .hero h2{
+        font-size:38px;
+    }
+
+    .portal{
+        display:none;
+    }
+}
+
+@media(max-width:500px){
+    header{
+        padding:14px 20px;
+    }
+
+    .hero{
+        margin-top:25px;
+    }
+
+    .hero h2{
+        font-size:32px;
+    }
+
+    .info-grid{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="brand">
+        <div class="logo">S</div>
+
+        <div>
+            <h1>SISTec</h1>
+            <p>Sagar Institute of Science and Technology</p>
+        </div>
+    </div>
+
+    <div class="portal">
+        🎓 ONLINE EXAMINATION PORTAL
+    </div>
+
+</header>
+
+
+<section class="hero">
+
+    <div class="hero-text">
+
+        <div class="badge">
+            🎓 Academic Assessment Platform
+        </div>
+
+        <h2>
+            Welcome to<br>
+            <span>Online Examination</span>
+        </h2>
+
+        <p>
+            Test your knowledge, evaluate your understanding and
+            improve your academic performance through an interactive
+            online examination system.
+        </p>
+
+        <div class="tags">
+            <span>📚 Learn</span>
+            <span>🧠 Practice</span>
+            <span>🎯 Perform</span>
+            <span>🏆 Succeed</span>
+        </div>
+
+    </div>
+
+
+    <div class="exam-card">
+
+        <div class="exam-head">
+            <h3>📋 Examination Details</h3>
+            <span class="active">● ACTIVE</span>
+        </div>
+
+        <div class="subject">
+            <small>EXAMINATION SUBJECT</small>
+            <h3>Number System & Boolean Logic</h3>
+        </div>
+
+        <div class="info-grid">
+
+            <div class="info">
+                <small>📝 Questions</small>
+                <strong>30 MCQs</strong>
+            </div>
+
+            <div class="info">
+                <small>⏱️ Duration</small>
+                <strong>30 Minutes</strong>
+            </div>
+
+            <div class="info">
+                <small>🎯 Maximum Marks</small>
+                <strong>30 Marks</strong>
+            </div>
+
+            <div class="info">
+                <small>✅ Passing Marks</small>
+                <strong>40%</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="main">
+
+    <div class="card">
+
+        <h3>👨‍🎓 Student Information</h3>
+
+        <div class="input-group">
+            <label>Student Name</label>
+            <input
+                type="text"
+                id="studentName"
+                placeholder="Enter your full name"
+            >
+        </div>
+
+        <div class="input-group">
+            <label>Roll Number</label>
+            <input
+                type="text"
+                id="rollNumber"
+                placeholder="Enter your roll number"
+            >
+        </div>
+
+        <div class="checkbox">
+            <input type="checkbox" id="agree" onchange="checkAgreement()">
+
+            <label for="agree">
+                I have read and understood all examination instructions
+                and agree to follow the examination rules.
+            </label>
+        </div>
+
+        <button
+            class="start-btn"
+            id="startBtn"
+            disabled
+            onclick="startExam()"
+        >
+            🚀 START EXAMINATION
+        </button>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>📋 Examination Instructions</h3>
+
+        <ul class="instructions">
+
+            <li>Read every question carefully.</li>
+
+            <li>Select only one option for each MCQ.</li>
+
+            <li>Use Previous and Next buttons for navigation.</li>
+
+            <li>Total examination time is 30 minutes.</li>
+
+            <li>Do not refresh or close the browser.</li>
+
+            <li>You can mark questions for review.</li>
+
+            <li>Submit the examination before time expires.</li>
+
+            <li>Your result will be displayed after submission.</li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <strong>SISTec</strong> |
+    Sagar Institute of Science and Technology
+
+    <br><br>
+
+    © 2026 SISTec • Online Examination Portal
+
+    <br>
+
+    Learn • Practice • Perform • Succeed
+
+</footer>
+
+
+<script>
+
+function checkAgreement(){
+
+    const checkbox = document.getElementById("agree");
+    const button = document.getElementById("startBtn");
+
+    button.disabled = !checkbox.checked;
+}
+
+
+function startExam(){
+
+    const name =
+        document.getElementById("studentName").value.trim();
+
+    const roll =
+        document.getElementById("rollNumber").value.trim();
+
+    const agree =
+        document.getElementById("agree").checked;
+
+
+    if(name === ""){
+        alert("Please enter your Student Name.");
+        return;
+    }
+
+    if(roll === ""){
+        alert("Please enter your Roll Number.");
+        return;
+    }
+
+    if(!agree){
+        alert("Please accept the examination instructions.");
+        return;
+    }
+
+
+    localStorage.clear();
+
+    localStorage.setItem("studentName", name);
+    localStorage.setItem("rollNumber", roll);
+
+    window.location.href = "exam.html";
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SISTec | Examination</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Segoe UI,Arial,sans-serif;
+}
+
+body{
+    background:#f1f5f9;
+    color:#172033;
+}
+
+/* HEADER */
+
+.header{
+    background:linear-gradient(135deg,#071b4d,#1646a0);
+    color:white;
+    padding:14px 5%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo-area{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo{
+    width:45px;
+    height:45px;
+    background:white;
+    color:#1646a0;
+    border-radius:10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:800;
+    font-size:21px;
+}
+
+.logo-area h2{
+    font-size:18px;
+}
+
+.logo-area p{
+    font-size:11px;
+    opacity:.8;
+}
+
+.timer{
+    background:#dc2626;
+    padding:10px 18px;
+    border-radius:10px;
+    font-weight:bold;
+    font-size:17px;
+}
+
+/* LAYOUT */
+
+.container{
+    max-width:1200px;
+    margin:25px auto;
+    padding:0 20px;
+    display:grid;
+    grid-template-columns:1fr 280px;
+    gap:20px;
+}
+
+/* QUESTION CARD */
+
+.question-card{
+    background:white;
+    border-radius:18px;
+    padding:28px;
+    box-shadow:0 8px 25px rgba(0,0,0,.07);
+}
+
+.top-info{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:15px;
+}
+
+.question-number{
+    font-weight:bold;
+    color:#2563eb;
+}
+
+.student{
+    color:#64748b;
+    font-size:13px;
+}
+
+.progress{
+    width:100%;
+    height:8px;
+    background:#e2e8f0;
+    border-radius:10px;
+    overflow:hidden;
+    margin-bottom:28px;
+}
+
+.progress-bar{
+    height:100%;
+    background:linear-gradient(90deg,#2563eb,#4f46e5);
+    transition:.3s;
+}
+
+.question{
+    font-size:22px;
+    line-height:1.5;
+    margin-bottom:25px;
+}
+
+.option{
+    padding:16px;
+    border:2px solid #e2e8f0;
+    border-radius:13px;
+    margin-bottom:12px;
+    cursor:pointer;
+    transition:.2s;
+    display:flex;
+    gap:12px;
+    align-items:center;
+}
+
+.option:hover{
+    border-color:#93c5fd;
+    background:#eff6ff;
+}
+
+.option.selected{
+    border-color:#2563eb;
+    background:#eff6ff;
+}
+
+.option input{
+    accent-color:#2563eb;
+}
+
+.buttons{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    margin-top:25px;
+}
+
+.btn{
+    border:none;
+    padding:12px 18px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.previous{
+    background:#e2e8f0;
+}
+
+.next{
+    background:#2563eb;
+    color:white;
+}
+
+.review{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.clear{
+    background:#fee2e2;
+    color:#b91c1c;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    background:white;
+    border-radius:18px;
+    padding:20px;
+    height:max-content;
+    box-shadow:0 8px 25px rgba(0,0,0,.07);
+    position:sticky;
+    top:90px;
+}
+
+.sidebar h3{
+    margin-bottom:15px;
+}
+
+.legend{
+    font-size:12px;
+    margin-bottom:15px;
+    line-height:2;
+}
+
+.dot{
+    display:inline-block;
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    margin-right:5px;
+}
+
+.answered{
+    background:#2563eb;
+}
+
+.review-dot{
+    background:#f59e0b;
+}
+
+.not-answered{
+    background:#e2e8f0;
+}
+
+.palette{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:7px;
+}
+
+.palette button{
+    height:38px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    background:#e2e8f0;
+}
+
+.palette button.answered{
+    background:#2563eb;
+    color:white;
+}
+
+.palette button.marked{
+    background:#f59e0b;
+    color:white;
+}
+
+.palette button.current{
+    outline:3px solid #0f172a;
+}
+
+.submit{
+    width:100%;
+    margin-top:20px;
+    padding:14px;
+    border:none;
+    border-radius:11px;
+    background:#dc2626;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+@media(max-width:850px){
+
+    .container{
+        grid-template-columns:1fr;
+    }
+
+    .sidebar{
+        position:static;
+    }
+
+    .header{
+        padding:12px 18px;
+    }
+
+    .timer{
+        font-size:14px;
+        padding:8px 12px;
+    }
+
+    .question{
+        font-size:19px;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<header class="header">
+
+    <div class="logo-area">
+
+        <div class="logo">S</div>
+
+        <div>
+            <h2>SISTec</h2>
+            <p>Online Examination Portal</p>
+        </div>
+
+    </div>
+
+    <div class="timer" id="timer">
+        30:00
+    </div>
+
+</header>
+
+
+<div class="container">
+
+
+    <!-- QUESTION -->
+
+    <main class="question-card">
+
+        <div class="top-info">
+
+            <div
+                class="question-number"
+                id="questionNumber">
+            </div>
+
+            <div
+                class="student"
+                id="studentInfo">
+            </div>
+
+        </div>
+
+
+        <div class="progress">
+            <div
+                class="progress-bar"
+                id="progressBar">
+            </div>
+        </div>
+
+
+        <div
+            class="question"
+            id="question">
+        </div>
+
+
+        <div id="options"></div>
+
+
+        <div class="buttons">
+
+            <button
+                class="btn previous"
+                onclick="previousQuestion()">
+                ← Previous
+            </button>
+
+            <button
+                class="btn clear"
+                onclick="clearAnswer()">
+                Clear
+            </button>
+
+            <button
+                class="btn review"
+                onclick="markReview()">
+                🔖 Review
+            </button>
+
+            <button
+                class="btn next"
+                id="nextButton"
+                onclick="nextQuestion()">
+                Next →
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <h3>Question Palette</h3>
+
+        <div class="legend">
+
+            <div>
+                <span class="dot answered"></span>
+                Answered
+            </div>
+
+            <div>
+                <span class="dot review-dot"></span>
+                Marked for Review
+            </div>
+
+            <div>
+                <span class="dot not-answered"></span>
+                Not Answered
+            </div>
+
+        </div>
+
+
+        <div
+            class="palette"
+            id="palette">
+        </div>
+
+
+        <button
+            class="submit"
+            onclick="submitExam()">
+            ✓ SUBMIT EXAM
+        </button>
+
+    </aside>
+
+</div>
+
+
+<script>
+
+/* =========================
+   QUESTIONS
+========================= */
+
+const questions = [
+
+{
+q:"What is the binary representation of decimal 10?",
+options:["1010","1001","1110","1100"],
+answer:0
+},
+
+{
+q:"What is the decimal value of binary 1010?",
+options:["8","10","12","14"],
+answer:1
+},
+
+{
+q:"Which number system uses only 0 and 1?",
+options:["Decimal","Binary","Octal","Hexadecimal"],
+answer:1
+},
+
+{
+q:"What is the base of decimal number system?",
+options:["2","8","10","16"],
+answer:2
+},
+
+{
+q:"What is the base of octal number system?",
+options:["2","8","10","16"],
+answer:1
+},
+
+{
+q:"What is the base of hexadecimal number system?",
+options:["2","8","10","16"],
+answer:3
+},
+
+{
+q:"Decimal 15 in binary is:",
+options:["1111","1110","1011","1101"],
+answer:0
+},
+
+{
+q:"Binary 1111 in decimal is:",
+options:["12","13","14","15"],
+answer:3
+},
+
+{
+q:"Decimal 8 in octal is:",
+options:["7","8","10","11"],
+answer:2
+},
+
+{
+q:"Octal 10 in decimal is:",
+options:["8","10","16","2"],
+answer:0
+},
+
+{
+q:"Decimal 10 in hexadecimal is:",
+options:["A","B","C","F"],
+answer:0
+},
+
+{
+q:"Hexadecimal A in decimal is:",
+options:["8","9","10","11"],
+answer:2
+},
+
+{
+q:"Hexadecimal F in binary is:",
+options:["1110","1111","1010","1100"],
+answer:1
+},
+
+{
+q:"Binary 1111 in hexadecimal is:",
+options:["A","B","E","F"],
+answer:3
+},
+
+{
+q:"Which is an invalid digit in octal number system?",
+options:["0","5","7","8"],
+answer:3
+},
+
+{
+q:"Which is an invalid digit in binary number system?",
+options:["0","1","2","3"],
+answer:2
+},
+
+{
+q:"Binary addition 1 + 1 gives:",
+options:["0","1","10","11"],
+answer:2
+},
+
+{
+q:"Binary addition 101 + 11 gives:",
+options:["1000","111","110","1010"],
+answer:0
+},
+
+{
+q:"TRUE is commonly represented as:",
+options:["0","1","2","-1"],
+answer:1
+},
+
+{
+q:"FALSE is commonly represented as:",
+options:["0","1","10","True"],
+answer:0
+},
+
+{
+q:"TRUE AND FALSE gives:",
+options:["TRUE","FALSE","1","Error"],
+answer:1
+},
+
+{
+q:"TRUE OR FALSE gives:",
+options:["TRUE","FALSE","0","Error"],
+answer:0
+},
+
+{
+q:"NOT TRUE gives:",
+options:["TRUE","FALSE","1","10"],
+answer:1
+},
+
+{
+q:"Which data type stores TRUE/FALSE values?",
+options:["int","float","boolean","char"],
+answer:2
+},
+
+{
+q:"Decimal 1 in binary is:",
+options:["0","1","10","11"],
+answer:1
+},
+
+{
+q:"Which one is a floating-point number?",
+options:["10","1010","3.14","TRUE"],
+answer:2
+},
+
+{
+q:"Decimal 0 in binary is:",
+options:["0","1","00.1","10"],
+answer:0
+},
+
+{
+q:"Binary 10000 in decimal is:",
+options:["8","10","16","32"],
+answer:2
+},
+
+{
+q:"Decimal 255 in hexadecimal is:",
+options:["FF","FE","F0","AA"],
+answer:0
+},
+
+{
+q:"Which number system is commonly used to represent memory addresses?",
+options:["Binary","Decimal","Octal","Hexadecimal"],
+answer:3
+}
+
+];
+
+
+/* =========================
+   VARIABLES
+========================= */
+
+let currentQuestion = 0;
+
+let answers =
+    new Array(questions.length).fill(null);
+
+let marked =
+    new Array(questions.length).fill(false);
+
+let timeLeft = 30 * 60;
+
+let timerInterval;
+
+
+/* =========================
+   STUDENT
+========================= */
+
+const studentName =
+    localStorage.getItem("studentName") || "Student";
+
+const rollNumber =
+    localStorage.getItem("rollNumber") || "N/A";
+
+document.getElementById("studentInfo").innerText =
+    studentName + " | Roll: " + rollNumber;
+
+
+/* =========================
+   LOAD SAVED DATA
+========================= */
+
+const savedAnswers =
+    localStorage.getItem("answers");
+
+const savedMarked =
+    localStorage.getItem("marked");
+
+const savedQuestion =
+    localStorage.getItem("currentQuestion");
+
+const savedTime =
+    localStorage.getItem("timeLeft");
+
+
+if(savedAnswers){
+    answers = JSON.parse(savedAnswers);
+}
+
+if(savedMarked){
+    marked = JSON.parse(savedMarked);
+}
+
+if(savedQuestion){
+    currentQuestion = Number(savedQuestion);
+}
+
+if(savedTime){
+    timeLeft = Number(savedTime);
+}
+
+
+/* =========================
+   SHOW QUESTION
+========================= */
+
+function showQuestion(){
+
+    const q = questions[currentQuestion];
+
+    document.getElementById("questionNumber").innerText =
+        `Question ${currentQuestion + 1} of ${questions.length}`;
+
+
+    document.getElementById("question").innerText =
+        q.q;
+
+
+    const options =
+        document.getElementById("options");
+
+    options.innerHTML = "";
+
+
+    q.options.forEach((option,index)=>{
+
+        const div =
+            document.createElement("div");
+
+        div.className = "option";
+
+
+        if(answers[currentQuestion] === index){
+
+            div.classList.add("selected");
+
+        }
+
+
+        div.innerHTML = `
+
+            <input
+                type="radio"
+                name="option"
+                ${answers[currentQuestion] === index ? "checked" : ""}
+            >
+
+            <span>${String.fromCharCode(65+index)}. ${option}</span>
+
+        `;
+
+
+        div.onclick = function(){
+
+            answers[currentQuestion] = index;
+
+            saveData();
+
+            showQuestion();
+
+        };
+
+
+        options.appendChild(div);
+
+    });
+
+
+    const percentage =
+        ((currentQuestion + 1) / questions.length) * 100;
+
+    document.getElementById("progressBar").style.width =
+        percentage + "%";
+
+
+    document.getElementById("nextButton").innerText =
+        currentQuestion === questions.length - 1
+        ? "Finish →"
+        : "Next →";
+
+
+    updatePalette();
+
+}
+
+
+/* =========================
+   PALETTE
+========================= */
+
+function createPalette(){
+
+    const palette =
+        document.getElementById("palette");
+
+    palette.innerHTML = "";
+
+
+    questions.forEach((_,index)=>{
+
+        const button =
+            document.createElement("button");
+
+        button.innerText = index + 1;
+
+        button.onclick = function(){
+
+            currentQuestion = index;
+
+            saveData();
+
+            showQuestion();
+
+        };
+
+        palette.appendChild(button);
+
+    });
+
+}
+
+
+/* =========================
+   UPDATE PALETTE
+========================= */
+
+function updatePalette(){
+
+    const buttons =
+        document.querySelectorAll(".palette button");
+
+
+    buttons.forEach((button,index)=>{
+
+        button.className = "";
+
+        if(answers[index] !== null){
+
+            button.classList.add("answered");
+
+        }
+
+        if(marked[index]){
+
+            button.classList.remove("answered");
+
+            button.classList.add("marked");
+
+        }
+
+        if(index === currentQuestion){
+
+            button.classList.add("current");
+
+        }
+
+    });
+
+}
+
+
+/* =========================
+   NEXT
+========================= */
+
+function nextQuestion(){
+
+    if(currentQuestion < questions.length - 1){
+
+        currentQuestion++;
+
+        saveData();
+
+        showQuestion();
+
+    }
+    else{
+
+        submitExam();
+
+    }
+
+}
+
+
+/* =========================
+   PREVIOUS
+========================= */
+
+function previousQuestion(){
+
+    if(currentQuestion > 0){
+
+        currentQuestion--;
+
+        saveData();
+
+        showQuestion();
+
+    }
+
+}
+
+
+/* =========================
+   CLEAR ANSWER
+========================= */
+
+function clearAnswer(){
+
+    answers[currentQuestion] = null;
+
+    saveData();
+
+    showQuestion();
+
+}
+
+
+/* =========================
+   MARK REVIEW
+========================= */
+
+function markReview(){
+
+    marked[currentQuestion] =
+        !marked[currentQuestion];
+
+    saveData();
+
+    updatePalette();
+
+}
+
+
+/* =========================
+   TIMER
+========================= */
+
+function updateTimer(){
+
+    const minutes =
+        Math.floor(timeLeft / 60);
+
+    const seconds =
+        timeLeft % 60;
+
+
+    document.getElementById("timer").innerText =
+
+        String(minutes).padStart(2,"0")
+        + ":"
+        +
+        String(seconds).padStart(2,"0");
+
+
+    if(timeLeft <= 300){
+
+        document.getElementById("timer").style.background =
+            "#991b1b";
+
+    }
+
+
+    if(timeLeft <= 0){
+
+        clearInterval(timerInterval);
+
+        alert("Time is over. Your examination will be submitted automatically.");
+
+        submitExam();
+
+        return;
+
+    }
+
+
+    timeLeft--;
+
+    localStorage.setItem("timeLeft",timeLeft);
+
+}
+
+
+/* =========================
+   SAVE
+========================= */
+
+function saveData(){
+
+    localStorage.setItem(
+        "answers",
+        JSON.stringify(answers)
+    );
+
+    localStorage.setItem(
+        "marked",
+        JSON.stringify(marked)
+    );
+
+    localStorage.setItem(
+        "currentQuestion",
+        currentQuestion
+    );
+
+}
+
+
+/* =========================
+   SUBMIT
+========================= */
+
+function submitExam(){
+
+    const answered =
+        answers.filter(a => a !== null).length;
+
+
+    const confirmSubmit =
+        confirm(
+
+            `Are you sure you want to submit?
+
+Answered: ${answered}/${questions.length}
+Unanswered: ${questions.length - answered}`
+
+        );
+
+
+    if(!confirmSubmit){
+
+        return;
+
+    }
+
+
+    clearInterval(timerInterval);
+
+
+    let correct = 0;
+
+
+    answers.forEach((answer,index)=>{
+
+        if(answer === questions[index].answer){
+
+            correct++;
+
+        }
+
+    });
+
+
+    const wrong =
+        answers.filter(
+            (answer,index)=>
+            answer !== null &&
+            answer !== questions[index].answer
+        ).length;
+
+
+    const unattempted =
+        questions.length - answered;
+
+
+    const percentage =
+        (correct / questions.length) * 100;
+
+
+    localStorage.setItem(
+        "correct",
+        correct
+    );
+
+    localStorage.setItem(
+        "wrong",
+        wrong
+    );
+
+    localStorage.setItem(
+        "unattempted",
+        unattempted
+    );
+
+    localStorage.setItem(
+        "percentage",
+        percentage.toFixed(2)
+    );
+
+
+    window.location.href =
+        "result.html";
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+createPalette();
+
+showQuestion();
+
+updateTimer();
+
+timerInterval =
+    setInterval(updateTimer,1000);
+
+</script>
+
+</body>
+</html>
